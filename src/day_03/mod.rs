@@ -3,13 +3,13 @@ use std::collections::HashSet;
 
 fn priority_from_intersection(strs: &[&str]) -> u64 {
   let byte = strs
-    .into_iter()
+    .iter()
     .map(|raw| HashSet::<char>::from_iter(raw.chars()))
     .reduce(|acc, current| &acc & &current)
     .expect("strs cant be an empty slice")
-    .into_iter()
+    .iter()
     .next()
-    .map(|letter| letter as u8)
+    .map(|&letter| letter as u8)
     .expect("Failed to find item common to all of input strs");
 
   let priority = match byte {

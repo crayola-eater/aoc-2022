@@ -53,7 +53,7 @@ pub fn task_1(raw: &str) -> String {
 
   stacks
     .into_iter()
-    .map(|stack| stack.last().unwrap().clone())
+    .map(|stack| *stack.last().unwrap())
     .collect()
 }
 
@@ -89,7 +89,7 @@ pub fn task_2(raw: &str) -> String {
 
   stacks
     .into_iter()
-    .map(|stack| stack.last().unwrap().clone())
+    .map(|stack| *stack.last().unwrap())
     .collect()
 }
 

@@ -32,9 +32,9 @@ pub fn task_1(raw: &str) -> u32 {
       match line.split_once(' ') {
         Some(("dir", _)) => continue,
         Some((file_size, _)) => {
-          stack
-            .last_mut()
-            .map(|last| *last += file_size.parse::<u32>().unwrap());
+          if let Some(last) = stack.last_mut() {
+            *last += file_size.parse::<u32>().unwrap();
+          }
         }
         _ => unreachable!("Invalid line {line}"),
       }
@@ -46,7 +46,9 @@ pub fn task_1(raw: &str) -> u32 {
       break;
     }
     total += directory_size;
-    stack.last_mut().map(|last| *last += directory_size);
+    if let Some(last) = stack.last_mut() {
+      *last += directory_size;
+    };
   }
 
   total
@@ -97,9 +99,9 @@ pub fn task_2(raw: &str) -> u32 {
       match line.split_once(' ') {
         Some(("dir", _)) => continue,
         Some((file_size, _)) => {
-          stack
-            .last_mut()
-            .map(|last| *last += file_size.parse::<u32>().unwrap());
+          if let Some(last) = stack.last_mut() {
+            *last += file_size.parse::<u32>().unwrap();
+          }
         }
         _ => unreachable!("Invalid line {line}"),
       }
@@ -114,7 +116,9 @@ pub fn task_2(raw: &str) -> u32 {
     {
       minimum = Some(directory_size);
     }
-    stack.last_mut().map(|last| *last += directory_size);
+    if let Some(last) = stack.last_mut() {
+      *last += directory_size;
+    }
   }
 
   minimum.unwrap()

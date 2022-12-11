@@ -12,10 +12,7 @@ fn update_head(direction: &str, head: &mut (i32, i32)) {
 }
 
 #[inline(always)]
-fn get_leader_and_follower<'a>(
-  i: usize,
-  knots: &'a mut [(i32, i32)],
-) -> ((i32, i32), &'a mut (i32, i32)) {
+fn get_leader_and_follower(i: usize, knots: &mut [(i32, i32)]) -> ((i32, i32), &mut (i32, i32)) {
   let (first_half, second_half) = knots.split_at_mut(i + 1);
   let leader = first_half[i];
   let follower = &mut second_half[0];
@@ -31,7 +28,7 @@ fn solve<const N: usize>(raw: &str) -> usize {
   // Need to keep track of visited nodes. Can't see a way to avoid the heap here.
   let mut visited = HashSet::<(i32, i32)>::new();
 
-  visited.insert(knots.last().unwrap().clone());
+  visited.insert(*knots.last().unwrap());
 
   raw
     .lines()
@@ -76,7 +73,7 @@ fn solve<const N: usize>(raw: &str) -> usize {
           }
         });
 
-        visited.insert(knots.last().unwrap().clone());
+        visited.insert(*knots.last().unwrap());
       });
     });
 

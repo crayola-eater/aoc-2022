@@ -17,7 +17,7 @@ pub fn parse_line(line: &str) -> [[u32; 2]; 2] {
 pub fn task_1(raw: &str) -> usize {
   raw
     .lines()
-    .map(|line| parse_line(line))
+    .map(parse_line)
     .filter(|[[a, b], [c, d]]| (a <= c && b >= d) || (c <= a && d >= b))
     .count()
 }
@@ -25,7 +25,7 @@ pub fn task_1(raw: &str) -> usize {
 pub fn task_2(raw: &str) -> usize {
   raw
     .lines()
-    .map(|line| parse_line(line))
+    .map(parse_line)
     .filter(|[[a, b], [c, d]]| !(b < c || d < a))
     .count()
 }
