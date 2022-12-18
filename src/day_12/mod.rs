@@ -4,14 +4,12 @@ type Position = (usize, usize);
 
 #[inline(always)]
 fn find_position(maze: &Grid, byte_to_find: u8) -> Option<Position> {
-  for row in 0..maze.len() {
-    for column in 0..maze[row].len() {
-      if byte_to_find == maze[row][column].0 {
-        return Some((row, column));
-      }
-    }
-  }
-  None
+  maze.iter().enumerate().find_map(|(row, cells)| {
+    cells
+      .iter()
+      .position(|(byte, _)| &byte_to_find == byte)
+      .map(|column| (row, column))
+  })
 }
 
 #[inline(always)]
